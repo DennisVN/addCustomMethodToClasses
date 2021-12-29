@@ -8,14 +8,9 @@ namespace TestJan
 {
     class MyOrchestration
     {
-        // Create fields
         private string name;
         private int instanceId;
         private int parentInstanceId;
-
-        public MyOrchestration()
-        {
-        }
 
         public void Render()
         {
@@ -35,7 +30,6 @@ namespace TestJan
             }
         }
 
-        // Create properties
         public string Name { get; set; }
         public int? InstanceId { get; set; }
         public int? ParentInstanceId { get; set; }

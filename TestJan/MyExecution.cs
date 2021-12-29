@@ -12,16 +12,10 @@ namespace TestJan
         private string functionName;
         private int invocationId;
 
-        public MyExecution()
-        {
-        }
-
         // Create properties
         public string FunctionName { get; set; }
         public int? InvocationId { get; set; }
 
-        // Method for rendering 
-        // TODO: validate properties
         public void Render()
         {
             if (this.FunctionName == null)

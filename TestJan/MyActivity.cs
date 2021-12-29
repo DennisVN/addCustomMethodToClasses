@@ -11,10 +11,6 @@ namespace TestJan
         private string name;
         private int instanceId;
 
-        public MyActivity()
-        {
-        }
-
         public void Render()
         {
             if(this.Name == null)
