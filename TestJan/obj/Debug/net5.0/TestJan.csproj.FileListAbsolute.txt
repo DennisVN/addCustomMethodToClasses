@@ -1,0 +1,16 @@
+C:\Users\BEAUCOUPDARGENT\source\repos\TestJan\TestJan\bin\Debug\net5.0\TestJan.exe
+C:\Users\BEAUCOUPDARGENT\source\repos\TestJan\TestJan\bin\Debug\net5.0\TestJan.deps.json
+C:\Users\BEAUCOUPDARGENT\source\repos\TestJan\TestJan\bin\Debug\net5.0\TestJan.runtimeconfig.json
+C:\Users\BEAUCOUPDARGENT\source\repos\TestJan\TestJan\bin\Debug\net5.0\TestJan.runtimeconfig.dev.json
+C:\Users\BEAUCOUPDARGENT\source\repos\TestJan\TestJan\bin\Debug\net5.0\TestJan.dll
+C:\Users\BEAUCOUPDARGENT\source\repos\TestJan\TestJan\bin\Debug\net5.0\ref\TestJan.dll
+C:\Users\BEAUCOUPDARGENT\source\repos\TestJan\TestJan\bin\Debug\net5.0\TestJan.pdb
+C:\Users\BEAUCOUPDARGENT\source\repos\TestJan\TestJan\obj\Debug\net5.0\TestJan.csproj.AssemblyReference.cache
+C:\Users\BEAUCOUPDARGENT\source\repos\TestJan\TestJan\obj\Debug\net5.0\TestJan.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\BEAUCOUPDARGENT\source\repos\TestJan\TestJan\obj\Debug\net5.0\TestJan.AssemblyInfoInputs.cache
+C:\Users\BEAUCOUPDARGENT\source\repos\TestJan\TestJan\obj\Debug\net5.0\TestJan.AssemblyInfo.cs
+C:\Users\BEAUCOUPDARGENT\source\repos\TestJan\TestJan\obj\Debug\net5.0\TestJan.csproj.CoreCompileInputs.cache
+C:\Users\BEAUCOUPDARGENT\source\repos\TestJan\TestJan\obj\Debug\net5.0\TestJan.dll
+C:\Users\BEAUCOUPDARGENT\source\repos\TestJan\TestJan\obj\Debug\net5.0\ref\TestJan.dll
+C:\Users\BEAUCOUPDARGENT\source\repos\TestJan\TestJan\obj\Debug\net5.0\TestJan.pdb
+C:\Users\BEAUCOUPDARGENT\source\repos\TestJan\TestJan\obj\Debug\net5.0\TestJan.genruntimeconfig.cache
