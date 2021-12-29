@@ -18,9 +18,9 @@ namespace TestJan
             pMyActivity.Render();
 
             MyOrchestration pMyOrchestration = new MyOrchestration();
-            pMyOrchestration.Name = "MyActivity";
+            //pMyOrchestration.Name = "MyActivity";
             pMyOrchestration.InstanceId = 66;
-            //pMyOrchestration.ParentInstanceId = 96;
+            pMyOrchestration.ParentInstanceId = 96;
             pMyOrchestration.Render();
 
             Console.ReadLine();

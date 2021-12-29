@@ -26,15 +26,14 @@ namespace TestJan
         {
             if (this.FunctionName == null)
             {
-                string result = "MyExecution result : InvocationId:{" + this.InvocationId + "})";
+                Console.WriteLine("MyExecution result : (InvocationId {" + this.InvocationId + "})");
                 //Console.WriteLine(result.Substring(0,7));
-            } if (this.InvocationId == null)
+            } else if (this.InvocationId == null)
             {
                 Console.WriteLine("MyExecution result : {" + this.FunctionName + "}");
             }
             else { 
-                Console.WriteLine("MyExecution result : {" + this.FunctionName + "}(" +
-                    this.InvocationId + ":{" + this.InvocationId + "})"); 
+                Console.WriteLine("MyExecution result : {" + this.FunctionName + "}(InvocationId:{" + this.InvocationId + "})"); 
             }
         }
 

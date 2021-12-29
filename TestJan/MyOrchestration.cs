@@ -26,6 +26,9 @@ namespace TestJan
             } else if (this.InstanceId == null)
             {
                 Console.WriteLine("MyOrchestration result : {" + this.Name + "}(ParentId:{" + this.ParentInstanceId + "})");
+            } else if (this.ParentInstanceId == null)
+            {
+                Console.WriteLine("MyOrchestration result : {" + this.Name + "}(InstanceId:{" + this.InstanceId + "})");
             } else {
                 Console.WriteLine("MyOrchestration result : {" + this.Name + "}(InstanceId:{" + this.InstanceId + "}" +
                 "(ParentId:{" + this.ParentInstanceId + "}))");
