@@ -22,8 +22,26 @@ namespace TestJan
             pMyOrchestration.ParentInstanceId = 96;
             pMyOrchestration.Render();
 
+            StaticRender(pMyExecution); 
+
             Console.ReadLine(); 
+
+        }
+        static void StaticRender(MyExecution pMyExecution)
+        {
+            MyExecution myExecution = pMyExecution;
+            Console.WriteLine("{" + myExecution.FunctionName + "}(InvocationId:{" + myExecution.InvocationId + "})");
         }
 
+        //static void testMethod(string name, int instanceid)
+        //{
+        //    Console.WriteLine("{" + name + "}(InstanceId:{" + instanceid + "})");
+        //}
+
+        //static void testMethod(string name, int instanceid, int parentinstanceid)
+        //{
+        //    Console.WriteLine("{" + name + "}(InstanceI{" + instanceid + "}(ParentId{" + parentinstanceid + "})");
+        //}
     }
+    
 }
