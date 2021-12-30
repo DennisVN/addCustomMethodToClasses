@@ -14,7 +14,7 @@ namespace TestJan
             lvInstOfOrchestrationContext = new OrchestrationContext();
 
             lvInstOfExecutionContext.FunctionName = @"FunctionName";
-            //lvInstOfExecutionContext.InvocationId = @"InvocationId";
+            lvInstOfExecutionContext.InvocationId = @"InvocationId";
 
             lvInstOfActivityContext.Name = @"Name";
             lvInstOfActivityContext.InstanceId = @"InstanceId";
@@ -91,24 +91,27 @@ namespace TestJan
 
         public static string Render(ExecutionContext pInstOfExecutionContext, ActivityContext pInstOfActiviyContext)
         {
-
-            if (pInstOfExecutionContext.FunctionName == null )
+            // if both objects complete : 
+            if (pInstOfExecutionContext != null && pInstOfActiviyContext != null)
             {
-                return ("InvocationId:{" + pInstOfExecutionContext.InvocationId.ToString() + "}");
-            }
-            else if (pInstOfExecutionContext.InvocationId == null)
-            {
-                return ("{" + pInstOfExecutionContext.FunctionName.ToString() + "}");
-            }
-            else
-            {
-                return ("{" + pInstOfExecutionContext.FunctionName.ToString() + "}(InvocationId:{" + pInstOfExecutionContext.InvocationId.ToString() + "}");
-            }
+               return (
+                    "{" + pInstOfExecutionContext.FunctionName + "}(InvocationId:{" + pInstOfExecutionContext.InvocationId + "}" + "\n\r" +
+                     "{" + pInstOfActiviyContext.Name + "}(InvocationId:{" + pInstOfActiviyContext.InstanceId + "}"
+                    );
+            } else { return "temp paceholder"; }
         }
 
         public static string Render(OrchestrationContext pInstOfOrchestrationContext, ExecutionContext pInstOfExecutionContext)
         {
-            return pInstOfOrchestrationContext.ToString() + "\n\r" + pInstOfExecutionContext;
+            // if both objects complete : 
+            if (pInstOfOrchestrationContext != null && pInstOfExecutionContext != null)
+            {
+                return (
+                     "{" + pInstOfOrchestrationContext.Name + "}(InstanceId:{" + pInstOfOrchestrationContext.InstanceId + "}(ParentInstanceId:{" + pInstOfOrchestrationContext.ParentInstanceId + "})"
+                     + "\n\r" + "{" + pInstOfExecutionContext.FunctionName + "}(InvocationId:{" + pInstOfExecutionContext.InvocationId + "}"
+                     );
+            }
+            else { return "temp paceholder"; }
         }
 
     }
