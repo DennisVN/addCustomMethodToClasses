@@ -13,8 +13,8 @@ namespace TestJan
             OrchestrationContext lvInstOfOrchestrationContext;
             lvInstOfOrchestrationContext = new OrchestrationContext();
 
-            //lvInstOfExecutionContext.FunctionName = @"FunctionName";
-            lvInstOfExecutionContext.InvocationId = @"InvocationId";
+            lvInstOfExecutionContext.FunctionName = @"FunctionName";
+            //lvInstOfExecutionContext.InvocationId = @"InvocationId";
 
             lvInstOfActivityContext.Name = @"Name";
             lvInstOfActivityContext.InstanceId = @"InstanceId";
@@ -23,14 +23,14 @@ namespace TestJan
             lvInstOfOrchestrationContext.InstanceId = @"InstanceId";
             lvInstOfOrchestrationContext.ParentInstanceId = @"ParentInstanceId";
 
-            string lvOutput = StaticClass.Render(lvInstOfExecutionContext);
+            string lvOutput  = StaticClass.Render(lvInstOfExecutionContext);
             string lvOutput2 = StaticClass.Render(lvInstOfActivityContext);
             string lvOutput3 = StaticClass.Render(lvInstOfOrchestrationContext);
             string lvOutput4 = StaticClass.Render(lvInstOfExecutionContext, lvInstOfActivityContext);
             string lvOutput5 = StaticClass.Render(lvInstOfOrchestrationContext, lvInstOfExecutionContext);
 
             Console.WriteLine(lvOutput);  // Output: {FunctionName}(InvocationId:{InvocationId}
-            Console.WriteLine(lvOutput2); // Output: TestJan.ActivityContext
+            Console.WriteLine(lvOutput2); // Output: {Name}(InstanceId:{InstanceId})
             Console.WriteLine(lvOutput3); // Output: TestJan.OrchestrationContext
             Console.WriteLine(lvOutput4); // Output: TestJan.ExecutionContext, TestJan.ActivityContext
             Console.WriteLine(lvOutput5); // Output: TestJan.OrchestrationContext, TestJan.ExecutionContext
@@ -59,17 +59,51 @@ namespace TestJan
 
         public static string Render(ActivityContext pInstOfActiviyContext)
         {
-            return pInstOfActiviyContext.ToString();
+            if (pInstOfActiviyContext.Name == null)
+            {
+                return ("(InstanceId:{" + pInstOfActiviyContext.InstanceId + "})");
+            }
+            else if (pInstOfActiviyContext.InstanceId == null)
+            {
+                return ("{" + pInstOfActiviyContext.Name + "}");
+            }
+            else
+            {
+                return ("{" + pInstOfActiviyContext.Name + "}(InstanceId:{" + pInstOfActiviyContext.InstanceId + "})");
+            }
         }
 
         public static string Render(OrchestrationContext pInstOfOrchestrationContext)
         {
-            return pInstOfOrchestrationContext.ToString();
+            if (pInstOfOrchestrationContext.Name == null)
+            {
+                return ("(InstanceId:{" + pInstOfOrchestrationContext.InstanceId + "}(ParentInstanceId:{" + pInstOfOrchestrationContext.ParentInstanceId + "})");
+            } else if (pInstOfOrchestrationContext.InstanceId == null)
+            {
+                return ("{" + pInstOfOrchestrationContext.Name + "}(ParentInstanceId:{" + pInstOfOrchestrationContext.ParentInstanceId + "})");
+            } else if (pInstOfOrchestrationContext.ParentInstanceId == null)
+            {
+                return ("{" + pInstOfOrchestrationContext.Name + "}(InstanceId:{" + pInstOfOrchestrationContext.InstanceId + "})");
+            }else {
+                return("{" + pInstOfOrchestrationContext.Name + "}(InstanceId:{" + pInstOfOrchestrationContext.InstanceId + "}(ParentInstanceId:{" + pInstOfOrchestrationContext.ParentInstanceId + "})");
+            }
         }
 
         public static string Render(ExecutionContext pInstOfExecutionContext, ActivityContext pInstOfActiviyContext)
         {
-            return pInstOfExecutionContext.ToString() + "\n\r" + pInstOfActiviyContext;
+
+            if (pInstOfExecutionContext.FunctionName == null )
+            {
+                return ("InvocationId:{" + pInstOfExecutionContext.InvocationId.ToString() + "}");
+            }
+            else if (pInstOfExecutionContext.InvocationId == null)
+            {
+                return ("{" + pInstOfExecutionContext.FunctionName.ToString() + "}");
+            }
+            else
+            {
+                return ("{" + pInstOfExecutionContext.FunctionName.ToString() + "}(InvocationId:{" + pInstOfExecutionContext.InvocationId.ToString() + "}");
+            }
         }
 
         public static string Render(OrchestrationContext pInstOfOrchestrationContext, ExecutionContext pInstOfExecutionContext)
