@@ -31,7 +31,7 @@ namespace TestJan
 
             Console.WriteLine(lvOutput);  // Output: {FunctionName}(InvocationId:{InvocationId}
             Console.WriteLine(lvOutput2); // Output: {Name}(InstanceId:{InstanceId})
-            Console.WriteLine(lvOutput3); // Output: TestJan.OrchestrationContext
+            Console.WriteLine(lvOutput3); // Output: {Name}(InstanceId:{InstanceId}(ParentInstanceId:{ParentInstanceId})
             Console.WriteLine(lvOutput4); // Output: TestJan.ExecutionContext, TestJan.ActivityContext
             Console.WriteLine(lvOutput5); // Output: TestJan.OrchestrationContext, TestJan.ExecutionContext
 
