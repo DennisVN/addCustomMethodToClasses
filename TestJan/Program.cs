@@ -32,11 +32,11 @@ namespace TestJan
             Console.WriteLine(lvOutput);  // Output: {FunctionName}(InvocationId:{InvocationId}
             Console.WriteLine(lvOutput2); // Output: {Name}(InstanceId:{InstanceId})
             Console.WriteLine(lvOutput3); // Output: {Name}(InstanceId:{InstanceId}(ParentInstanceId:{ParentInstanceId})
-            //Console.WriteLine(lvOutput4); // Output: {FunctionName}(InvocationId:{InvocationId} + {Name}(InvocationId:{InstanceId}
-            //Console.WriteLine(lvOutput5); // Output: {Name}(InstanceId:{InstanceId}(ParentInstanceId:{ParentInstanceId})+ {FunctionName}(InvocationId:{InvocationId}
+            Console.WriteLine(lvOutput4); // Output: {FunctionName}(InvocationId:{InvocationId} + {Name}(InvocationId:{InstanceId}
+            Console.WriteLine(lvOutput5); // Output: {Name}(InstanceId:{InstanceId}(ParentInstanceId:{ParentInstanceId})+ {FunctionName}(InvocationId:{InvocationId}
 
             #region Test Results
-            // Test ExecutionContext 
+            //Test ExecutionContext
             //ExecutionContext lvTestContext; // Please give FunctionName or InvocationId to process.
             //lvTestContext = new ExecutionContext();
             //string lvTestOP = StaticClass.Render(lvTestContext);
@@ -73,31 +73,43 @@ namespace TestJan
             //Console.WriteLine(lvTestOP6);
 
             // Test OrchestrationContext
-            OrchestrationContext lvTestContext7; // {Name}(ParentInstanceId:{})
-            lvTestContext7 = new OrchestrationContext();
-            lvTestContext7.Name = @"Name";
-            string lvTestOP7 = StaticClass.Render(lvTestContext7);
-            Console.WriteLine(lvTestOP7);
+            //OrchestrationContext lvTestContext7; // {Name}(ParentInstanceId:{})
+            //lvTestContext7 = new OrchestrationContext();
+            //lvTestContext7.Name = @"Name";
+            //string lvTestOP7 = StaticClass.Render(lvTestContext7);
+            //Console.WriteLine(lvTestOP7);
 
-            OrchestrationContext lvTestContext8; // (InstanceId:{InstanceId}(ParentInstanceId:{})
-            lvTestContext8 = new OrchestrationContext();
-            lvTestContext8.InstanceId = @"InstanceId";
-            string lvTestOP8 = StaticClass.Render(lvTestContext8);
-            Console.WriteLine(lvTestOP8);
+            //OrchestrationContext lvTestContext8; // (InstanceId:{InstanceId}(ParentInstanceId:{})
+            //lvTestContext8 = new OrchestrationContext();
+            //lvTestContext8.InstanceId = @"InstanceId";
+            //string lvTestOP8 = StaticClass.Render(lvTestContext8);
+            //Console.WriteLine(lvTestOP8);
 
-            OrchestrationContext lvTestContext9; // (InstanceId:{}(ParentInstanceId:{ParentInstanceId})
-            lvTestContext9 = new OrchestrationContext();
-            lvTestContext9.ParentInstanceId = @"ParentInstanceId";
-            string lvTestOP9 = StaticClass.Render(lvTestContext9);
-            Console.WriteLine(lvTestOP9);
+            //OrchestrationContext lvTestContext9; // (InstanceId:{}(ParentInstanceId:{ParentInstanceId})
+            //lvTestContext9 = new OrchestrationContext();
+            //lvTestContext9.ParentInstanceId = @"ParentInstanceId";
+            //string lvTestOP9 = StaticClass.Render(lvTestContext9);
+            //Console.WriteLine(lvTestOP9);
 
-            OrchestrationContext lvTestContext10; // (InstanceId:{}(ParentInstanceId:{})
-            lvTestContext10 = new OrchestrationContext();
-            string lvTestOP10 = StaticClass.Render(lvTestContext10);
-            Console.WriteLine(lvTestOP10);
+            //OrchestrationContext lvTestContext10; // All fields are empty, please complete Name, InstanceId and/or ParentInstanceId !
+            //lvTestContext10 = new OrchestrationContext();
+            //string lvTestOP10 = StaticClass.Render(lvTestContext10);
+            //Console.WriteLine(lvTestOP10);
+
+            // Test Execution + Activity chain
+            //ExecutionContext lvTestContext11;
+            //lvTestContext11 = new ExecutionContext();
+            //lvTestContext11.FunctionName = @"FunctionName";
+            //lvTestContext11.InvocationId = @"InvocationId";
+            //ActivityContext lvTestContext12;
+            //lvTestContext12 = new ActivityContext();
+            //lvTestContext12.Name = @"Name";
+            //lvTestContext12.InstanceId = @"InstanceId";
+            //string lvTestOP11 = StaticClass.Render(lvTestContext11, lvTestContext12);
+            //Console.WriteLine(lvTestOP11);
+
 
             #endregion
-
 
             Console.ReadLine();
         }
@@ -124,23 +136,23 @@ namespace TestJan
             }
         }
 
-        public static string Render(ActivityContext pInstOfActiviyContext)
+        public static string Render(ActivityContext pInstOfActivityContext)
         {
-            if(pInstOfActiviyContext.Name == null && pInstOfActiviyContext.InstanceId == null)
+            if(pInstOfActivityContext.Name == null && pInstOfActivityContext.InstanceId == null)
             {
                 return ("Please give Name or InstanceId to Render");
             }
-            else if (pInstOfActiviyContext.Name == null)
+            else if (pInstOfActivityContext.Name == null)
             {
-                return ("(InstanceId:{" + pInstOfActiviyContext.InstanceId + "})");
+                return ("(InstanceId:{" + pInstOfActivityContext.InstanceId + "})");
             }
-            else if (pInstOfActiviyContext.InstanceId == null)
+            else if (pInstOfActivityContext.InstanceId == null)
             {
-                return ("{" + pInstOfActiviyContext.Name + "}");
+                return ("{" + pInstOfActivityContext.Name + "}");
             }
             else
             {
-                return ("{" + pInstOfActiviyContext.Name + "}(InstanceId:{" + pInstOfActiviyContext.InstanceId + "})");
+                return ("{" + pInstOfActivityContext.Name + "}(InstanceId:{" + pInstOfActivityContext.InstanceId + "})");
             }
         }
 
@@ -164,16 +176,16 @@ namespace TestJan
             }
         }
 
-        public static string Render(ExecutionContext pInstOfExecutionContext, ActivityContext pInstOfActiviyContext)
+        public static string Render(ExecutionContext pInstOfExecutionContext, ActivityContext pInstOfActivityContext)
         {
             // if both objects complete : 
-            if (pInstOfExecutionContext != null && pInstOfActiviyContext != null)
+            if (pInstOfExecutionContext != null && pInstOfActivityContext != null)
             {
                return (
                     "{" + pInstOfExecutionContext.FunctionName + "}(InvocationId:{" + pInstOfExecutionContext.InvocationId + "}" + "\n\r" +
-                     "{" + pInstOfActiviyContext.Name + "}(InvocationId:{" + pInstOfActiviyContext.InstanceId + "}"
+                    "{" + pInstOfActivityContext.Name + "}(InvocationId:{" + pInstOfActivityContext.InstanceId + "}"
                     );
-            } else { return "temp paceholder"; }
+            } else { return "Fields missing"; }
         }
 
         public static string Render(OrchestrationContext pInstOfOrchestrationContext, ExecutionContext pInstOfExecutionContext)
@@ -186,7 +198,7 @@ namespace TestJan
                      + "\n\r" + "{" + pInstOfExecutionContext.FunctionName + "}(InvocationId:{" + pInstOfExecutionContext.InvocationId + "}"
                      );
             }
-            else { return "temp paceholder"; }
+            else { return "Fields missing"; }
         }
 
     }
