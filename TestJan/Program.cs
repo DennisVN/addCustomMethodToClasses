@@ -32,11 +32,74 @@ namespace TestJan
             Console.WriteLine(lvOutput);  // Output: {FunctionName}(InvocationId:{InvocationId}
             Console.WriteLine(lvOutput2); // Output: {Name}(InstanceId:{InstanceId})
             Console.WriteLine(lvOutput3); // Output: {Name}(InstanceId:{InstanceId}(ParentInstanceId:{ParentInstanceId})
-            Console.WriteLine(lvOutput4); // Output: TestJan.ExecutionContext, TestJan.ActivityContext
-            Console.WriteLine(lvOutput5); // Output: TestJan.OrchestrationContext, TestJan.ExecutionContext
+            //Console.WriteLine(lvOutput4); // Output: {FunctionName}(InvocationId:{InvocationId} + {Name}(InvocationId:{InstanceId}
+            //Console.WriteLine(lvOutput5); // Output: {Name}(InstanceId:{InstanceId}(ParentInstanceId:{ParentInstanceId})+ {FunctionName}(InvocationId:{InvocationId}
+
+            #region Test Results
+            // Test ExecutionContext 
+            //ExecutionContext lvTestContext; // Please give FunctionName or InvocationId to process.
+            //lvTestContext = new ExecutionContext();
+            //string lvTestOP = StaticClass.Render(lvTestContext);
+            //Console.WriteLine(lvTestOP);
+
+            //ExecutionContext lvTestContext2; // InvocationId:{InvocationId}
+            //lvTestContext2 = new ExecutionContext();
+            //lvTestContext2.InvocationId = @"InvocationId";
+            //string lvTestOP2 = StaticClass.Render(lvTestContext2);
+            //Console.WriteLine(lvTestOP2);
+
+            //ExecutionContext lvTestContext5; // {FunctionName}
+            //lvTestContext5 = new ExecutionContext();
+            //lvTestContext5.FunctionName = @"FunctionName";
+            //string lvTestOP5 = StaticClass.Render(lvTestContext5);
+            //Console.WriteLine(lvTestOP5);
+
+            // Test ActivityContext 
+            // ActivityContext lvTestContext3; // {Name}
+            //lvTestContext3 = new ActivityContext();
+            //lvTestContext3.Name = @"Name";
+            //string lvTestOP3 = StaticClass.Render(lvTestContext3);
+            //Console.WriteLine(lvTestOP3);
+
+            //ActivityContext lvTestContext4; // (InstanceId:{InstanceId})
+            //lvTestContext4 = new ActivityContext();
+            //lvTestContext4.InstanceId = @"InstanceId";
+            //string lvTestOP4 = StaticClass.Render(lvTestContext4);
+            //Console.WriteLine(lvTestOP4);
+
+            //ActivityContext lvTestContext6; // Please give Name or InstanceId to Render
+            //lvTestContext6 = new ActivityContext();
+            //string lvTestOP6 = StaticClass.Render(lvTestContext6);
+            //Console.WriteLine(lvTestOP6);
+
+            // Test OrchestrationContext
+            OrchestrationContext lvTestContext7; // {Name}(ParentInstanceId:{})
+            lvTestContext7 = new OrchestrationContext();
+            lvTestContext7.Name = @"Name";
+            string lvTestOP7 = StaticClass.Render(lvTestContext7);
+            Console.WriteLine(lvTestOP7);
+
+            OrchestrationContext lvTestContext8; // (InstanceId:{InstanceId}(ParentInstanceId:{})
+            lvTestContext8 = new OrchestrationContext();
+            lvTestContext8.InstanceId = @"InstanceId";
+            string lvTestOP8 = StaticClass.Render(lvTestContext8);
+            Console.WriteLine(lvTestOP8);
+
+            OrchestrationContext lvTestContext9; // (InstanceId:{}(ParentInstanceId:{ParentInstanceId})
+            lvTestContext9 = new OrchestrationContext();
+            lvTestContext9.ParentInstanceId = @"ParentInstanceId";
+            string lvTestOP9 = StaticClass.Render(lvTestContext9);
+            Console.WriteLine(lvTestOP9);
+
+            OrchestrationContext lvTestContext10; // (InstanceId:{}(ParentInstanceId:{})
+            lvTestContext10 = new OrchestrationContext();
+            string lvTestOP10 = StaticClass.Render(lvTestContext10);
+            Console.WriteLine(lvTestOP10);
+
+            #endregion
+
 
             Console.ReadLine();
-
         }
     }
 
@@ -44,22 +107,30 @@ namespace TestJan
     {
         public static string Render(ExecutionContext pInstOfExecutionContext)
         {
-            if (pInstOfExecutionContext.FunctionName == null)
+            if (pInstOfExecutionContext.FunctionName == null && pInstOfExecutionContext.InvocationId == null)
             {
-                return ("InvocationId:{" + pInstOfExecutionContext.InvocationId.ToString() + "}");
+                return ("Please give FunctionName or InvocationId to Render.");
             } 
             else if (pInstOfExecutionContext.InvocationId == null)
             {
                 return ("{" + pInstOfExecutionContext.FunctionName.ToString() + "}");
             }
+            else if (pInstOfExecutionContext.FunctionName == null ) 
+            {
+                return ("InvocationId:{"+ pInstOfExecutionContext.InvocationId + "}");
+            }
             else { 
-                return ("{" + pInstOfExecutionContext.FunctionName.ToString() +"}(InvocationId:{"+ pInstOfExecutionContext.InvocationId.ToString() + "}");
+                return ("{" + pInstOfExecutionContext.FunctionName +"}(InvocationId:{"+ pInstOfExecutionContext.InvocationId + "}");
             }
         }
 
         public static string Render(ActivityContext pInstOfActiviyContext)
         {
-            if (pInstOfActiviyContext.Name == null)
+            if(pInstOfActiviyContext.Name == null && pInstOfActiviyContext.InstanceId == null)
+            {
+                return ("Please give Name or InstanceId to Render");
+            }
+            else if (pInstOfActiviyContext.Name == null)
             {
                 return ("(InstanceId:{" + pInstOfActiviyContext.InstanceId + "})");
             }
@@ -75,7 +146,11 @@ namespace TestJan
 
         public static string Render(OrchestrationContext pInstOfOrchestrationContext)
         {
-            if (pInstOfOrchestrationContext.Name == null)
+            if(pInstOfOrchestrationContext.Name == null && pInstOfOrchestrationContext.InstanceId == null && pInstOfOrchestrationContext.ParentInstanceId == null)
+            {
+                return "All fields are empty, please complete Name, InstanceId and/or ParentInstanceId ! ";
+            }
+            else if (pInstOfOrchestrationContext.Name == null)
             {
                 return ("(InstanceId:{" + pInstOfOrchestrationContext.InstanceId + "}(ParentInstanceId:{" + pInstOfOrchestrationContext.ParentInstanceId + "})");
             } else if (pInstOfOrchestrationContext.InstanceId == null)
